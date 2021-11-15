@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+
+body {
+  background-image: url("./images/hohoho.jpg");
+  background-size: cover;
+  font-family: "Poppins", sans-serif;
+}
+#container {
+  display: flex;
+  justify-content: center;
+}
+.text {
+  margin-top: 250px;
+  color: rgb(135, 39, 39);
+}
+.sub-text {
+  display: flex;
+  text-align: center;
+
+  justify-content: space-evenly;
+}
+.time {
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 65px;
+}
+.time p {
+  font-size: 50px;
+  margin: 0px;
+  font-weight: 600;
+}
+.time span {
+  font-size: 12px;
+}
+.text h1 {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
