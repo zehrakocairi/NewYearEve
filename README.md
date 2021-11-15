@@ -1,2 +1,2 @@
-# NewYearEve
+# NewYearsEve
 Extremely Simple Test JS Project
