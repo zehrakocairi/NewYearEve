@@ -49,11 +49,11 @@ li p {
   text-align: center;
   margin: 5px;
 }
-#rondom-recipe {
+#random-recipe {
   position: relative;
   padding: 18px;
 }
-#rondom-recipe img {
+#random-recipe img {
   width: 100%;
   box-shadow: 0px 9px 16px 6px #e0e9ee;
   border-top-left-radius: 5px;
