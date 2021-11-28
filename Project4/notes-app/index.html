@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notes App</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <div class="notes">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <button
+    style="position: fixed; right: 0;top: 0; margin: 10px; padding: 5px 12px; border: none; background-color: white;"
+    onclick="addNewNote()">New Notes</button>
+  <div class="notes">
+    <div class="note">
       <div class="tools">
-        <button><i class="fa fa-edit"></i></i></button>
+        <button onclick="toggleEdit()"><i class="fa fa-edit"></i></i></button>
         <button><i class="fas fa-trash"></i></button>
       </div>
-      <div class="main"></div>
-      <textarea></textarea>
+      <div class="text-container">
+        <div class="cover"></div>
+        <textarea class="hidden"></textarea>
+      </div>
     </div>
-  </body>
+  </div>
+
+
+</body>
+
 </html>

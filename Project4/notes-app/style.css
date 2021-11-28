@@ -18,3 +18,30 @@ body {
   height: 400px;
   width: 400px;
 }
+.text-container{
+  position: relative;;
+}
+
+.text-container .cover{
+  padding: 0px 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgb(162, 207, 103);
+  width: 300px;
+  height: 300px;
+}
+
+
+.text-container textarea{
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-color: bisque;
+  width: 300px;
+  height: 300px;
+}
+.hidden{
+  display: none;
+}
+
