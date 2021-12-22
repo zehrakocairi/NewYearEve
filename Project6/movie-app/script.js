@@ -9,6 +9,10 @@ getMovies(APIURL);
 
 async function getMovies(url) {
   const resp = await fetch(url);
+  if(resp.ok == false){
+    alert("Unable to load movies. Please refresh the page!");
+    return;
+  }
   const respData = await resp.json();
 
   showMovies(respData.results);
