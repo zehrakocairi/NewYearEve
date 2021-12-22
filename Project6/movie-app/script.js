@@ -3,19 +3,19 @@ const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
 
 let mainDiv = document.getElementById("main");
-let form = document.getElementById("form");
+let form = document.getElementById("search-form");
 
 getMovies(APIURL);
 
 async function getMovies(url) {
   const resp = await fetch(url);
-  if(resp.ok == false){
+  if (resp.ok == false) {
     alert("Unable to load movies. Please refresh the page!");
     return;
   }
   const respData = await resp.json();
-
-  showMovies(respData.results);
+  let sortedMovies = respData.results.sort((first, second) => second.vote_average - first.vote_average);
+  showMovies(sortedMovies);
 }
 
 function showMovies(movies) {
@@ -45,10 +45,13 @@ function showMovies(movies) {
   });
 }
 
-let colorImdb = (value) => value >= 8 ? "green" : value >= 5 ? "orange" : "red";
+function colorImdb(value) {
+  return value >= 8 ? "green" : value >= 5 ? "orange" : "red";
+}
+
 
 form.addEventListener("submit", (e) => {
-let searchInput = document.getElementById("search");
+  let searchInput = document.getElementById("search");
   e.preventDefault();
   let searchValue = searchInput.value;
   if (searchValue) {
