@@ -40,7 +40,6 @@ body {
 .movies {
   background-color: #383d6c;
   width: 300px;
-  border-radius: 5px;
   margin: 15px;
 }
 .movies img {
@@ -62,8 +61,8 @@ body {
 .imdb {
   padding: 5px;
   height: 100%;
-  background-color: #23274e;   
-  border: solid 3px #d58b33;
+  background-color: #23274e;
+  border: solid 2px white;
   border-radius: 3px;
 }
 .overview {
@@ -78,7 +77,6 @@ body {
   transform: translateY(100%);
   transition: transform 0.3s ease-in;
   font-size: 13px;
-  border-radius: 5px;
 }
 .movie:hover .overview {
   transform: translateY(0);
