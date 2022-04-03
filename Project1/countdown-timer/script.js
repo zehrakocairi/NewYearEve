@@ -1,4 +1,6 @@
-let newYear = new Date("1 Jan 2022");
+let now = new Date();
+let newYear = new Date(now.getFullYear() + 1, 0, 1);
+console.log("New year : " + newYear.toDateString());
 
 let leftDays = document.getElementById("day");
 let leftHours = document.getElementById("hour");
