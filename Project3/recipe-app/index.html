@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -11,58 +16,24 @@
     <div id="container">
       <div id="cover-items">
         <div id="header">
-          <input type="text" />
-          <button id="search"><i class="fas fa-search"></i></button>
+          <input type="text" id="search-term" />
+          <button id="search">Search</i></button>
         </div>
         <div id="fav-meals">
           <h3>Favourite Meals</h3>
-          <ul>
-            <li>
-              <img
-                src="https://www.themealdb.com//images//media//meals//utxqpt1511639216.jpg"
-                alt=""
-              />
-              <p>Pasta</p>
-            </li>
-            <li>
-              <img
-                src="https:\/\/www.themealdb.com\/images\/media\/meals\/wai9bw1619788844.jpg"
-                alt=""
-              />
-              <p>Chicken</p>
-            </li>
-            <li>
-              <img
-                src="https:\/\/www.themealdb.com\/images\/media\/meals\/quuxsx1511476154.jpg"
-                alt=""
-              />
-              <p>Cake</p>
-            </li>
-            <li>
-              <img
-                src="https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg/preview"
-                alt=""
-              />
-              <p>Noddle</p>
-            </li>
-          </ul>
+          <ul id="fav-meal-list"></ul>
         </div>
-        <div id="random-recipe">
-          <p id="up-text">Recipe of the day</p>
-          <img
-            src="https://www.themealdb.com//images//media//meals//yqwtvu1487426027.jpg"
-            alt=""
-          />
-          <div id="meal-desc">
-            <h5>Veggie veggies</h5>
-          </div>
+        <div id="recipes"></div>
+      </div>
+      <div class="popup-container hidden" id="meal-popup">
+        <div class="popup">
+          <button id="close-popup">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="meal-info" id="meal-info"></div>
         </div>
-        <button onclick="addRandomMeals()">
-          <i class="fas fa-heart"></i>Get Next Random
-        </button>
       </div>
     </div>
-
-    <script defer src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
