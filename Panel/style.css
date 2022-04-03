@@ -1,0 +1,36 @@
+.container{
+    padding: 50px 5%;
+}
+.container>h1:first-child
+{
+    text-align: center;
+    color: #485c9a;
+}
+.projects{
+    display: flex;
+    align-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.project-box{
+    margin: 10px;
+    min-width: 180px;
+    padding: 25px 20px;
+    text-align: center;
+    background-color: #f0f0f0;
+    color: black;
+    border-radius: 8px;
+}
+.project-box a{
+    color: black;
+    color: #cb3778;
+    text-decoration: auto;
+}
+.project-box a h3{
+    margin: 5px 10px;
+}
+
+.project-box a h5{
+    margin: 3px 10px;
+}
