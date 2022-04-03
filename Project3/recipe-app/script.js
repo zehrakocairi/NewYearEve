@@ -6,15 +6,15 @@ let mealPopup = document.getElementById("meal-popup");
 let popupCloseBtn = document.getElementById("close-popup");
 let mealInfoEl = document.getElementById("meal-info");
 
-getMeals();
-fetchFavMeals();
+getMealsAsync();
+fetchFavMealsAsync();
 
-async function getMeals() {
+async function getMealsAsync() {
   let resp = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
   let respData = await resp.json();
   let meals = respData.meals;
   let meal = meals[0];
-  addMeals(meal);
+  addMeal(meal);
 }
 
 async function getMealById(id) {
@@ -35,33 +35,36 @@ async function getMealBySearch(name) {
   return meal;
 }
 
-async function addMeals(mealData) {
+async function addMeal(mealData) {
   let meal = document.createElement("div");
-  meal.innerHTML = `<p id="up-text">Recipe of the day</p>
+  meal.innerHTML = `<p data-recipe-id="${mealData.idMeal}" class="up-text">Recipe of the day</p>
       <img
         src="${mealData.strMealThumb}"
         alt=""
       />
-      <div id="meal-desc">
+      <div class="meal-desc">
         <h5>${mealData.strMeal}</h5>
-        <i id="heart-button" class="fa fa-heart"></i>
+        <div class="wish-icon">
+          <i class="fa fa-heart"></i>
+        </div>
       </div>
       `;
 
   recipes.appendChild(meal);
 
-  let heartButton = document.getElementById("heart-button");
+  let heartButton = meal.getElementsByClassName("wish-icon")[0];
 
-  heartButton.addEventListener("click", () => {
+  heartButton.addEventListener("click", async (e) => {
+    e.stopPropagation();
     if (heartButton.classList.contains("active")) {
-      removeMealLS(mealData.idMeal);
+      await removeLocalMealAsync(mealData.idMeal);
       heartButton.classList.remove("active");
     } else {
-      addMealLS(mealData.idMeal);
+      addMealToLocal(mealData.idMeal);
       heartButton.classList.add("active");
     }
 
-    fetchFavMeals();
+    await fetchFavMealsAsync();
   });
 
   meal.addEventListener("click", () => {
@@ -69,34 +72,46 @@ async function addMeals(mealData) {
   });
 }
 
-let addMealLS = (mealId) => {
-  const mealIds = getMealLS();
+let addMealToLocal = (mealId) => {
+  const mealIds = getLocalMeals();
   localStorage.setItem("mealIds", JSON.stringify([...mealIds, mealId]));
 };
 
-let removeMealLS = (mealId) => {
-  const mealIds = getMealLS();
+let removeLocalMealAsync = async (mealId) => {
+  const mealIds = getLocalMeals();
+
+  let mealsToKeep = mealIds.filter((id) => {
+    return id !== mealId;
+  });
 
   localStorage.setItem(
-    "mealIds",
-    JSON.stringify(
-      mealIds.filter((id) => {
-        id !== mealId;
-      })
-    )
+    "mealIds", JSON.stringify(mealsToKeep)
   );
-  fetchFavMeals();
+
+  await fetchFavMealsAsync();
+
+  refreshFavIcons(mealId);
 };
 
-function getMealLS() {
+function refreshFavIcons(mealId) {
+  let removedItem = document.querySelector(`.up-text[data-recipe-id='${mealId}']`);
+
+  if (removedItem == null) {
+    return;
+  }
+
+  removedItem.parentNode.querySelector(".wish-icon.active").classList.remove("active");
+}
+
+function getLocalMeals() {
   const mealIds = JSON.parse(localStorage.getItem("mealIds"));
 
   return mealIds === null ? [] : mealIds;
 }
 
-async function fetchFavMeals() {
+async function fetchFavMealsAsync() {
   favMealList.innerHTML = "";
-  const mealIds = getMealLS();
+  const mealIds = getLocalMeals();
 
   for (let i = 0; i < mealIds.length; i++) {
     let meal = await getMealById(mealIds[i]);
@@ -117,11 +132,13 @@ function addMealFavorite(mealData) {
        `;
   favMealList.appendChild(favMeal);
 
-  let clearButton = document.querySelector(".clear");
-  clearButton.addEventListener("click", () => {
-    removeMealLS(mealData.idMeal);
+  let clearButton = favMeal.querySelector(".clear");
+  clearButton.addEventListener("click", async (e) => {
+    e.stopPropagation();
 
-    fetchFavMeals();
+    await removeLocalMealAsync(mealData.idMeal);
+
+    await fetchFavMealsAsync();
   });
 
   favMeal.addEventListener("click", () => {
@@ -168,6 +185,6 @@ searchBtn.addEventListener("click", async () => {
   const searchValue = searchTerm.value;
   const meals = await getMealBySearch(searchValue);
   meals.forEach((meal) => {
-    addMeals(meal);
+    addMeal(meal);
   });
 });

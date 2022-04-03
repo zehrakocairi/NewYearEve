@@ -39,18 +39,39 @@ img {
 #fav-meal-list li {
   list-style-type: none;
   cursor: pointer;
+  position: relative;
 }
-li img {
+#fav-meal-list button.clear{
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  border-radius: 15px;
+  border: white;
+  background-color: #c41626;
+  color: white;
+  width: 24px;
+  height: 24px;
+  transition: all .3s;
+}
+#fav-meal-list button.clear:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  color: #c41626;
+  background-color: white;
+}
+#fav-meal-list li img {
   width: 70px;
   border: 2px solid white;
   border-radius: 50%;
   display: block;
+  margin: auto;
 }
-li p {
+#fav-meal-list li p {
   font-size: 11px;
   font-weight: 600;
   text-align: center;
   margin: 5px;
+  max-width: 100px;
 }
 #recipes {
   position: relative;
@@ -63,7 +84,7 @@ li p {
   border-top-right-radius: 5px;
   cursor: pointer;
 }
-#meal-desc {
+.meal-desc {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +93,7 @@ li p {
   box-shadow: 0px 9px 16px 6px #e0e9ee;
   border-radius: 5px;
 }
-#up-text {
+.up-text {
   position: absolute;
   top: 50px;
   width: 90px;
@@ -109,7 +130,7 @@ li p {
   border-radius: 5px;
   padding: 0 2rem;
   position: relative;
-  max-height: 100vh;
+  max-height: 85vh;
   overflow: auto;
   max-width: 400px;
   width: 100%;
@@ -125,4 +146,12 @@ li p {
 }
 .mail-info h1 {
   text-align: center;
+}
+.meal-desc .wish-icon.active{
+  color: #c695c2;
+}
+
+.wish-icon{
+  border-radius: 50%;
+  padding: 10px;
 }
