@@ -37,7 +37,7 @@ async function getMealBySearch(name) {
 
 async function addMeals(mealData) {
   let meal = document.createElement("div");
-  meal.innerHTML = `<p id="up-text">Recipe of the day</p>
+  meal.innerHTML = `<p class="up-text">Recipe of the day</p>
       <img
         src="${mealData.strMealThumb}"
         alt=""
