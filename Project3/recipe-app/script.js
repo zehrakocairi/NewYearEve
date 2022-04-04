@@ -3,7 +3,7 @@ let recipes = document.getElementById("recipes");
 let searchTerm = document.getElementById("search-term");
 let searchBtn = document.getElementById("search");
 let mealPopup = document.getElementById("meal-popup");
-let popupCloseBtn = document.getElementById("close-popup");
+let popupCloseBtn = document.querySelector(".close-popup");
 let mealInfoEl = document.getElementById("meal-info");
 
 getMealsAsync();
@@ -31,8 +31,8 @@ async function getMealBySearch(name) {
     "https://www.themealdb.com/api/json/v1/1/search.php?s=" + name
   );
   let respData = await resp.json();
-  let meal = respData.meals;
-  return meal;
+  let meals = respData.meals;
+  return meals;
 }
 
 async function addMeal(mealData) {
@@ -53,7 +53,6 @@ async function addMeal(mealData) {
   recipes.appendChild(meal);
 
   let heartButton = meal.getElementsByClassName("wish-icon")[0];
-
   heartButton.addEventListener("click", async (e) => {
     e.stopPropagation();
     if (heartButton.classList.contains("active")) {
@@ -84,9 +83,7 @@ let removeLocalMealAsync = async (mealId) => {
     return id !== mealId;
   });
 
-  localStorage.setItem(
-    "mealIds", JSON.stringify(mealsToKeep)
-  );
+  localStorage.setItem("mealIds", JSON.stringify(mealsToKeep));
 
   await fetchFavMealsAsync();
 
@@ -94,13 +91,17 @@ let removeLocalMealAsync = async (mealId) => {
 };
 
 function refreshFavIcons(mealId) {
-  let removedItem = document.querySelector(`.up-text[data-recipe-id='${mealId}']`);
+  let removedItem = document.querySelector(
+    `.up-text[data-recipe-id='${mealId}']`
+  );
 
   if (removedItem == null) {
     return;
   }
 
-  removedItem.parentNode.querySelector(".wish-icon.active").classList.remove("active");
+  removedItem.parentNode
+    .querySelector(".wish-icon.active")
+    .classList.remove("active");
 }
 
 function getLocalMeals() {
