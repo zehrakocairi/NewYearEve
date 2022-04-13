@@ -19,11 +19,11 @@ body {
   justify-content: flex-end;
   padding: 10px;
 }
-.edit-button {
+.edit {
   margin-right: 5px;
 }
 
-.notes {
+.note {
   background-color: peachpuff;
   margin: 20px;
   height: 400px;
@@ -35,15 +35,15 @@ textarea {
   height: 300px;
   border: none;
 }
-.hidden {
+.note .hidden {
   display: none;
 }
-.add-button {
+#add {
   margin: 10px;
   position: fixed;
   top: 5px;
   right: 5px;
 }
-.add-button button {
+#add button {
   padding: 3px 5px;
 }
