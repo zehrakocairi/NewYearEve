@@ -1,29 +1,64 @@
-//let cover = document.querySelector(".cover");
-//let note = document.querySelector(".note");
+let addBtn = document.getElementById("add");
 
-function editNote(event) {
-  let cover = event.target.parentNode.parentNode.querySelector(".cover");
-  let note = event.target.parentNode.parentNode.querySelector(".note");
-  cover.classList.toggle("hidden");
-  note.classList.toggle("hidden");
+addBtn.addEventListener("click", () => {
+  addNewNote();
+});
 
-  let isEditMode = cover.classList.contains("hidden");
-  if (!isEditMode) {
-    let val = note.value;
-    let html = marked.parse(val);
-    cover.innerHTML = html;
-  }
+const notes = JSON.parse(localStorage.getItem("notes"));
+
+if (notes) {
+  notes.forEach((note) => {
+    addNewNote(note);
+  });
 }
-function addNewNote() {
-  let newNote = document.createElement("div");
-  newNote.innerHTML = `
-  <div class="notes">
+
+function addNewNote(text = "") {
+  let note = document.createElement("div");
+  note.classList.add("note");
+  note.innerHTML = `
     <div class="tools">
-     <button onclick="editNote(event)" class="edit-button">edit</button>
-     <button class="delete-button">delete</button>
+      <button class="edit">edit</button>
+      <button class="delete">delete</button>
     </div>
-    <div class="cover hidden"></div>
-    <textarea class="note"></textarea>
-  </div>`;
-  document.body.appendChild(newNote);
+    <div class="main ${text ? "" : "hidden"}"></div>
+    <textarea class="textarea ${text ? "hidden" : ""}"></textarea>
+`;
+
+  let editBtn = note.querySelector(".edit");
+  let deleteBtn = note.querySelector(".delete");
+  let main = note.querySelector(".main");
+  let textarea = note.querySelector(".textarea");
+
+  textarea.value = marked.parse(text);
+
+  editBtn.addEventListener("click", () => {
+    main.classList.toggle("hidden");
+    textarea.classList.toggle("hidden");
+  });
+
+  deleteBtn.addEventListener("click", () => {
+    note.remove();
+
+    updateLS();
+  });
+
+  textarea.addEventListener("input", (e) => {
+    const { value } = e.target;
+
+    main.innerHTML = marked.parse(value);
+    updateLS();
+  });
+
+  document.body.appendChild(note);
+}
+
+function updateLS() {
+  let textNotes = document.querySelectorAll("textarea");
+  let notes = [];
+
+  textNotes.forEach((textNote) => {
+    notes.push(textNote.value);
+  });
+
+  localStorage.setItem("notes", JSON.stringify(notes));
 }
