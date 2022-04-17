@@ -9,8 +9,6 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
 }
-#container {
-}
 .head {
   text-align: center;
   font-size: 80px;
@@ -31,19 +29,17 @@ input {
 .input::placeholder {
   color: #b5b5b5;
 }
-.cover {
+.list {
   display: flex;
   align-items: center;
   height: 60px;
 }
-.todos {
+.toDos {
   padding-inline-start: 0px;
   width: 400px;
-}
-ul {
   width: 100%;
 }
-.todos li {
+.toDos .toDo {
   list-style-type: none;
   background-color: white;
   padding: 6px;
@@ -54,7 +50,7 @@ ul {
   flex-direction: column;
   margin-left: 5px;
 }
-#done {
+.done {
   background-color: white;
   border: none;
   border-radius: 3px;
@@ -62,7 +58,10 @@ ul {
   margin-bottom: 2px;
   color: #73b43d;
 }
-#remove {
+.toDos .toDo.completed {
+  text-decoration: line-through;
+}
+.remove {
   background-color: white;
   border: none;
   border-radius: 3px;
@@ -70,10 +69,6 @@ ul {
   margin-top: 2px;
   color: #73b43d;
 }
-.done {
-  text-decoration: line-through;
-}
-
 .hidden {
   display: none;
 }
